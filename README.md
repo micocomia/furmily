@@ -1,45 +1,123 @@
-# Git Integration & Wix CLI <img align="left" src="https://user-images.githubusercontent.com/89579857/185785022-cab37bf5-26be-4f11-85f0-1fac63c07d3b.png">
+# Furmily
+(http://mcomi069.wixsite.com/furmily)
 
-This repo is part of Git Integration & Wix CLI, a set of tools that allows you to write, test, and publish code for your Wix site locally on your computer. 
+## README by Group 1
 
-Connect your site to GitHub, develop in your favorite IDE, test your code in real time, and publish your site from the command line.
+**Contributors:**
+- Tian Lai - 300433668
+- Yue Huang - 300131462
+- Mico Ellerich Comia - 300218564
+- Shan Lyu - 300452698
+- Kathy Tao - 8538843
 
-## Set up this repository in your IDE
-This repo is connected to a Wix site. That site tracks this repo's default branch. Any code committed and pushed to that branch from your local IDE appears on the site.
+---
 
-Before getting started, make sure you have the following things installed:
-* [Git](https://git-scm.com/download)
-* [Node](https://nodejs.org/en/download/), version 14.8 or later.
-* [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) or [yarn](https://yarnpkg.com/getting-started/install)
-* An SSH key [added to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account).
+## Features
 
-To set up your local environment and start coding locally, do the following:
+- **User Registration and Account Management**: Users can create accounts, manage personal details, and store pet profiles.
+- **Subscription Plan**: Subscription plans based on pet size.
+- **Service Booking and Scheduling**: Users can select convenient times and locations for service appointments and check availability.
+- **Online Shop**: A subscribed member can purchase pet-related items online at a discounted price. Non-subscribers can shop at regular prices.
+- **Payment Integration**: Supports online payments with multiple options for ease of use.
+- **Email Notifications**: Users receive email notifications for actions like service booking and subscribing.
+- **Customer Feedback and Rating System**: Allows users to rate and review services.
 
-1. Open your terminal and navigate to where you want to store the repo.
-1. Clone the repo by running `git clone <your-repository-url>`.
-1. Navigate to the repo's directory by running `cd <directory-name>`.
-1. Install the repo's dependencies by running `npm install` or `yarn install`.
-1. Install the Wix CLI by running `npm install -g @wix/cli` or `yarn global add @wix/cli`.  
-   Once you've installed the CLI globally, you can use it with any Wix site's repo.
+---
 
-For more information, see [Setting up Git Integration & Wix CLI](https://support.wix.com/en/article/velo-setting-up-git-integration-wix-cli-beta).
+## Guide
 
-## Write Velo code in your IDE
-Once your repo is set up, you can write code in it as you would in any other non-Wix project. The repo's file structure matches the [public](https://support.wix.com/en/article/velo-working-with-the-velo-sidebar#public), [backend](https://support.wix.com/en/article/velo-working-with-the-velo-sidebar#backend), and [page code](https://support.wix.com/en/article/velo-working-with-the-velo-sidebar#page-code) sections in Editor X.
+### 1. User Registration and Account Management
 
-Learn more about [this repo's file structure](https://support.wix.com/en/article/velo-understanding-your-sites-github-repository-beta).
+#### Prerequisites:
+- Valid email
 
-## Test your code with the Local Editor
-The Local Editor allows you test changes made to your site in real time. The code in your local IDE is synced with the Local Editor, so you can test your changes before committing them to your repo. You can also change the site design in the Local Editor and sync it with your IDE.
+#### How to register:
+1. On the Home Page, click the top-right "Log In or Sign Up" button.
+2. For new users, click "Sign Up" and provide your details (First name, Last name, Email, Password).
+3. Click the "Sign Up" button to be directed to the homepage with your account logged in.
 
-Start the Local Editor by navigating to this repo's directory in your terminal and running `wix dev`.
+#### How to manage info:
+1. Go to "Account Settings" under the member pages.
+2. Provide detailed information like birthdate, phone number, address, and payment preferences for better service.
+3. Modify your personal information by updating fields and clicking "Submit".
+4. You can review stored information in relevant checkboxes, except for bank details for privacy reasons.
 
-For more information, see [Working with the Local Editor](https://support.wix.com/en/article/velo-working-with-the-local-editor-beta).
+#### How to add a pet:
+1. Navigate to "My Pets and Bookings".
+2. Click the "+" beside "Pets" and fill in the pet's details.
+3. Once submitted, the pet will appear under the "Pets" section of the "My Pets and Bookings" page.
 
-## Preview and publish with the Wix CLI
-The Wix CLI is a tool that allows you to work with your site locally from your computer's terminal. You can use it to build a preview version of your site and publish it. You can also use the CLI to install [approved npm packages](https://support.wix.com/en/article/velo-working-with-npm-packages) to your site.
+#### How to delete a pet:
+1. Go to "My Pets and Bookings".
+2. Select a pet from the dropdown and click "Delete". The pet will no longer appear in your profile and will be ineligible for bookings.
 
-Learn more about [working with the Wix CLI](https://support.wix.com/en/article/velo-working-with-the-wix-cli-beta).
+---
 
-## Invite contributors to work with you
-Git Integration & Wix CLI extends Editor X's [concurrent editing](https://support.wix.com/en/article/editor-x-about-concurrent-editing) capabilities. Invite other developers as collaborators on your [site](https://support.wix.com/en/article/inviting-people-to-contribute-to-your-site) and your [GitHub repo](https://docs.github.com/en/account-and-profile/setting-up-and-managing-your-personal-account-on-github/managing-access-to-your-personal-repositories/inviting-collaborators-to-a-personal-repository). Multiple developers can work on a site's code at once.
+### 2. Subscription Plan
+
+#### Prerequisites:
+- Logged-in account
+
+#### How to book a subscription plan:
+1. Under the home page, click "Join Us" or go to the "Subscriptions" page.
+2. Choose a subscription plan based on pet size and fill in your personal and payment information.
+3. After payment, a confirmation email will be sent with subscription details.
+
+#### How to cancel a subscription plan:
+1. Go to "My Subscriptions".
+2. Find your current plan and click "Cancel Subscription".
+3. Confirm cancellation when prompted. The canceled plan will appear with a gray "Cancel" label.
+
+---
+
+### 3. Service Booking and Scheduling
+
+#### Prerequisites:
+- Logged-in account
+- Valid subscription plan
+
+#### How to book a service:
+1. Go to "My Pets and Bookings" and click "+" beside "Service Booking".
+2. Choose a location, service, and an applicable pet (based on subscription type).
+3. Confirm the booking by clicking "Book". Booked services will appear in the "Service Bookings" section.
+
+#### How to cancel a booking:
+1. Under "My Pets and Bookings", click "Cancel Booking" and select the schedule to cancel.
+2. Confirm cancellation. The service will be removed from your bookings and become available again.
+
+---
+
+### 4. Online Shop
+
+#### Prerequisites:
+- Logged-in account
+
+#### Member-exclusive Store:
+1. After subscribing, access the member shopping area under the member page.
+2. Add products to the cart and proceed to checkout.
+
+#### Non-members Store:
+1. Non-subscribers can access the store through the "Shopping" button and add items to the cart.
+2. Proceed to checkout and complete payment.
+
+---
+
+### 5. Payment Integration
+
+- Wix Payments integration is available for services such as subscription and store payments, allowing credit and debit card options.
+
+---
+
+### 6. Email Notifications
+
+- Wix-related apps provide email notifications for subscription actions, service bookings, and confirmations.
+
+---
+
+### 7. Customer Feedback and Rating System
+
+#### Prerequisites:
+- Previously booked a service
+
+#### How to use:
+- After completing a service, a rating and feedback option will appear on the "Service Booking" page. Star rating is mandatory, and text feedback is optional. Submit after completing the review.

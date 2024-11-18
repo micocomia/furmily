@@ -3,6 +3,7 @@ import wixUsers from 'wix-users';
 import wixData from 'wix-data';
 
 $w.onReady(function () {
+
     $w("#button2").onClick(() => {
         let userId = wixUsers.currentUser.id;  // Get the current user's ID
         let selectedRating = $w("#ratingsInput").value; // Get the selected rating from the Wix rating input

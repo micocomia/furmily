@@ -29,11 +29,64 @@ $w.onReady(async function () {
     }
     
     // Event listeners for dropdown changes
+    $w("#petDropdown").onChange(enableLocService);
     $w("#locationPicker").onChange(loadAvailableDates);
     $w("#servicePicker").onChange(loadAvailableDates);
     $w("#datePicker").onChange(loadAvailableTimes);
-    $w("#timePicker").onChange(loadUserPets);
-    $w("#petDropdown").onChange(enableBook);
+    $w("#timePicker").onChange(enableBook);
+
+    loadUserPets();
+
+    // Load pets for the logged-in user
+    async function loadUserPets() {
+        let orders = await wixPaidPlans.getCurrentMemberOrders();
+        let activePlans = orders.filter(order => order.status == 'ACTIVE');
+        let activePlanNames = activePlans.map(order => order.planName)
+        console.log("Active Plan Names: ", activePlanNames);
+
+        if (activePlanNames.length > 0){
+            const results = await wixData.query("Pets")
+                .eq("ownerId", member._id)
+                .hasSome("size", activePlanNames)
+                .find();
+
+            if (results.items.length > 0) {
+                const petOptions = results.items.map(pet => ({
+                    label: pet.firstName,
+                    value: pet._id
+                }));
+
+                $w("#petDropdown").options = petOptions;
+                $w("#petDropdown").enable();  // Enable time slot dropdown
+                $w("#planPrompt").hide();
+            } else {
+                $w("#planPrompt").text = "No pet with applicable subscription plan.";
+                $w("#planPrompt").show();
+            }
+        } else {
+            $w("#petDropdown").options = [];
+            $w("#petDropdown").disable();  // Enable time slot dropdown
+
+            if (activePlanNames.length == 0){
+                $w("#planPrompt").text = "No applicable subscription plan.";
+                $w("#planPrompt").show();
+            }
+
+        }
+    }
+
+    async function enableLocService() {
+        const selectedPet = $w('#petDropdown').value;
+
+        // All dropdowns must have a value
+        if (selectedPet){
+            $w("#locationPicker").enable(); // Enable location picker
+            $w("#servicePicker").enable();
+        }else{
+            $w("#locationPicker").disable(); // Enable location picker
+            $w("#servicePicker").disable();
+        }        
+    }
 
     // Load available dates based on selected location and service type
     async function loadAvailableDates() {
@@ -81,6 +134,7 @@ $w.onReady(async function () {
             if (dateOptions.length > 0) {
                 $w("#datePicker").options = dateOptions;
                 $w("#datePicker").enable();  // Enable date dropdown if there are available dates
+                $w("#datePrompt").hide();
             } else {
                 $w("#datePrompt").text = "No available date.";
                 $w("#datePrompt").show();
@@ -124,6 +178,7 @@ $w.onReady(async function () {
 
                 $w("#timePicker").options = timeSlots;
                 $w("#timePicker").enable();  // Enable time slot dropdown
+                $w("#timePrompt").hide();            
             } else {
                 $w("#timePrompt").text = "No available time.";
                 $w("#timePrompt").show();
@@ -137,60 +192,20 @@ $w.onReady(async function () {
         }
     }
 
-    // Load pets for the logged-in user
-    async function loadUserPets() {
-        const location = $w("#locationPicker").value;
-        const serviceType = $w("#servicePicker").value;
-        const selectedDate = $w("#datePicker").value;
-        const selectedTime = $w("#timePicker").value;
-
-        let orders = await wixPaidPlans.getCurrentMemberOrders();
-        let activePlans = orders.filter(order => order.status == 'ACTIVE');
-        let activePlanNames = activePlans.map(order => order.planName)
-        console.log("Active Plan Names: ", activePlanNames);
-
-        if (location && serviceType && selectedDate && selectedTime && (activePlanNames.length > 0)){
-            const results = await wixData.query("Pets")
-                .eq("ownerId", member._id)
-                .hasSome("size", activePlanNames)
-                .find();
-
-            if (results.items.length > 0) {
-                const petOptions = results.items.map(pet => ({
-                    label: pet.firstName,
-                    value: pet._id
-                }));
-
-                $w("#petDropdown").options = petOptions;
-                $w("#petDropdown").enable();  // Enable time slot dropdown
-            } else {
-                $w("#planPrompt").text = "No pet with applicable subscription plan.";
-                $w("#planPrompt").show();
-            }
-        } else {
-            $w("#petDropdown").options = [];
-            $w("#petDropdown").disable();  // Enable time slot dropdown
-
-            if (activePlanNames.length == 0){
-                $w("#planPrompt").text = "No applicable subscription plan.";
-                $w("#planPrompt").show();
-            }
-
-        }
-    }
-
     // Enable book button
     async function enableBook() {
+        const selectedPet = $w('#petDropdown').value;
         const location = $w("#locationPicker").value;
         const serviceType = $w("#servicePicker").value;
         const selectedDate = $w("#datePicker").value;
         const selectedTime = $w("#timePicker").value;
-        const selectedPet = $w('#petDropdown').value;
 
         // All dropdowns must have a value
         if (location && serviceType && selectedDate && selectedPet && (selectedTime.length)){
+            $w("#emailCheckbox").enable()
             $w("#bookButton").enable()
         }else{
+            $w("#emailCheckbox").disable()
             $w("#bookButton").disable()
         }
     }

@@ -137,6 +137,10 @@ $w.onReady(async function () {
 
                 $w("#datePicker").options = [];
                 $w("#datePicker").disable();  // Disable date dropdown if no available dates
+                $w("#timePicker").options = [];
+                $w("#timePicker").disable();  // Disable time slot dropdown if no available slots
+                $w("#emailCheckbox").disable()
+                $w("#bookButton").disable()
             }
         } else {
             $w("#datePicker").options = [];

@@ -7,7 +7,9 @@ $w.onReady(function () {
         let userId = wixUsers.currentUser.id;  // Get the current user's ID
         let selectedRating = $w("#ratingsInput").value; // Get the selected rating from the Wix rating input
         let message = $w('#messageBox').value;
-        let consent = $w('#publicCheckbox').value;
+        let consent = $w('#publicCheckbox').checked;
+
+        console.log(consent)
 
         // Get the current date and time
         const currentDate = new Date();
